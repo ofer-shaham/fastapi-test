@@ -24,7 +24,7 @@ jobs:
         run: sudo apt-get install -y tree
 
       - name: List directory layout
-        run: tree my_project
+        run: ls -laR fastapi_project
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
