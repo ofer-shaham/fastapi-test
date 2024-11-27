@@ -16,3 +16,18 @@ jobs:
 
       - name: Run generate.sh script
         run: ./generate.sh
+
+      - name: Install tree
+        run: sudo apt-get install -y tree
+
+      - name: List directory layout
+        run: tree my_project
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build and run Docker containers
+        run: |
+          docker-compose up -d  # Run in detached mode
+          # Optionally, you can add commands to check the status of the containers
+          docker-compose ps
