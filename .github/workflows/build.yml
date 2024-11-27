@@ -35,6 +35,7 @@ jobs:
           sudo apt-get install -y docker-compose
 
       - name: Build and run Docker containers
+        working-directory: fastapi_project  # Change to the directory containing docker-compose.yml
         run: |
           docker-compose up -d  # Run in detached mode
           # Optionally, you can add commands to check the status of the containers
