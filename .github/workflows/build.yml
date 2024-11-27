@@ -1,0 +1,33 @@
+name: Generate Project
+
+on:
+  push:
+    branches:
+      - main  # Change this to the branch you want to trigger the action on
+  workflow_dispatch:  # Allows manual triggering of the workflow
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run generate.sh script
+        run: ./generate.sh
+
+      - name: Install tree
+        run: sudo apt-get install -y tree
+
+      - name: List directory layout
+        run: tree my_project
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build and run Docker containers
+        run: |
+          docker-compose up -d  # Run in detached mode
+          # Optionally, you can add commands to check the status of the containers
+          docker-compose ps
